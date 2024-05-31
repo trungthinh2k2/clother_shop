@@ -14,7 +14,7 @@
 - Order management: view the list of orders placed.
 ## Technologies Used:
 - Backend:
- + Spring boot
+  * Spring boot
  + Spring Boot
  + Spring Security
  + Spring Data JPA
