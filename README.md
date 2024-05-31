@@ -15,11 +15,11 @@
 ## Technologies Used:
 - Backend:
   * Spring boot
- + Spring Boot
- + Spring Security
- + Spring Data JPA
+  * Spring Boot
+  * Spring Security
+  * Spring Data JPA
 - Frontend:
- + HTML/CSS
- + Thymeleaf
- + Angular
+  * HTML/CSS
+  * Thymeleaf
+  * Angular
 - Database: Mariadb
