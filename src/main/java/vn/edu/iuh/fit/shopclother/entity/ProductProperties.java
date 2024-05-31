@@ -1,6 +1,6 @@
 package vn.edu.iuh.fit.shopclother.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,7 +20,7 @@ public class ProductProperties {
     @Column(name = "product_properties_id")
     private int id;
 
-    @Column(name = "type")
+    @Column(name = "type", columnDefinition = "nvarchar(500)")
     private String type;
     @Column(name = "image_small")
     private String imageSmall;

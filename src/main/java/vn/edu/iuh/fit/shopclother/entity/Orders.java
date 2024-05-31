@@ -1,6 +1,8 @@
 package vn.edu.iuh.fit.shopclother.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import java.util.Date;
@@ -18,16 +20,18 @@ public class Orders {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
     private int id;
-    @Column(name = "address")
+    @Column(name = "address", columnDefinition = "nvarchar(500)")
     private String address;
+    @Temporal(TemporalType.DATE)
     @Column(name = "created_date")
     private Date createdDate;
 
 
     @ManyToOne
-    @JoinColumn(name = "account_id")
+    @JoinColumn(name = "user_name")
     private Account account;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "orders")
     private List<OrderDetail> orderDetailList;
 }

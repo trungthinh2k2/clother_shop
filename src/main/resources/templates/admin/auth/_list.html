@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="UTF-8">
+	<title>Header</title>
+</head>
+<body>
+	<h3>PRODUCT LIST</h3>
+	<div class="container-fluid">
+		<table class="table table-bordered">
+			<thead class="bg-secondary" style="font-variant: small-caps;">
+			<tr>
+				<th>ID</th>
+				<th>NAME</th>
+				<th>PRICE</th>
+				<th>DATE</th>
+				<th>IMAGE</th>
+				<th>CATEGORY</th>
+				<th>AVAILABLE?</th>
+				<th>QUANTITY</th>
+				<th>ACTION</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr ng-repeat="item in pager.items">
+				<td>{{item.id}}</td>
+				<td>{{item.productName}}</td>
+				<td>{{item.price | number : 2}}</td>
+				<td>{{item.createdDate | date : 'dd-MM-yyyy'}}</td>
+				<td>{{item.image}}</td>
+				<td>{{item.category.categoryName}}</td>
+				<td>{{item.available?'Yes':'No'}}</td>
+				<td>{{item.quantity}}</td>
+				<td>
+					<div class="btn-group btn-group-xs">
+						<a ng-click="edit(item)" href="" class="btn btn-success"> <i class="glyphicon glyphicon-edit">Edit</i>
+						</a> <a ng-click="delete(item)" href="" class="btn btn-danger"> <i class="glyphicon glyphicon-trash">Del</i>
+					</a>
+					</div>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<hr>
+	<br>
+	<div class="panel-footer text-center">
+		<button ng-click="pager.first()" class="btn btn-danger">
+			<b class="glyphicon glyphicon-hand-up">first</b>
+		</button>
+		<button ng-click="pager.prev()" class="btn btn-secondary">
+			<b class="glyphicon glyphicon-hand-left">prev</b>
+		</button>
+		<button class="btn btn-danger">{{pager.page + 1}} of
+			{{pager.count}}</button>
+		<button ng-click="pager.next()" class="btn btn-secondary">
+			<b class="glyphicon glyphicon-hand-right">next</b>
+		</button>
+		<button ng-click="pager.last()" class="btn btn-danger">
+			<b class="glyphicon glyphicon-hand-down">last</b>
+		</button>
+	</div>
+</body>
+</html>
+

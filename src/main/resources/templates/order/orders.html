@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link
+            href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap"
+            rel="stylesheet">
+    <title>BEAUTIF-SHOP</title>
+    <!-- Angular -->
+    <script th:src="@{/assets/js/angular.min.js}"></script>
+    <script th:src="@{/assets/js/angular2.min.js}"></script>
+    <script src="/assets/js/shopping-cart.js"></script>
+    <script th:src="@{/assets/js/authen.js}"></script>
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/font-awesome.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/templatemo-hexashop.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/owl-carousel.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/lightbox.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/checkout.css}">
+</head>
+
+<body ng-app="app" ng-controller="ctrl">
+<!-- ***** Preloader Start ***** -->
+<div id="preloader">
+    <div class="jumper">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+<!-- ***** Preloader End ***** -->
+
+<!-- ***** header Start ***** -->
+<header th:replace="/layout/header.html"></header>
+<!-- ***** header End ***** -->
+
+<div class="container checkout">
+    <div class="row">
+        <div class="col-md-12 ">
+            <h4 class="mb-3">List order purchase</h4>
+            <div class="mb-3">
+                <th:block th:if="${#lists.isEmpty(orders)}">
+                    <p style="margin-top: 100px">Không có đơn hàng nào.</p>
+                </th:block>
+                <th:block th:unless="${#lists.isEmpty(orders)}">
+                    <table class="table table-bordered" style="margin-top: 100px">
+                        <thead class="thead-light">
+                        <tr>
+                            <th>No.</th>
+                            <th scope="col">Order No.</th>
+                            <th scope="col">Order Date</th>
+                            <th scope="col">Shipping Address</th>
+                            <th scope="col">Detail</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="order, state: ${orders}">
+                            <td>[[${state.index + 1}]]</td>
+                            <td>[[${order.id}]]</td>
+                            <td>[[${order.createdDate}]]</td>
+                            <td>[[${order.address}]]</td>
+                            <td><a th:href="@{|/order/detail/${order.id}|}"
+                                   class="btn btn-default"> <img
+                                    th:src="@{|/assets/images/search-icon.png|}">
+                            </a></td>
+                        </tr>
+                        </tbody>
+
+                    </table>
+                </th:block>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--<footer th:insert="/layout/_footer.html"></footer>-->
+
+
+<!-- jQuery -->
+<script th:src="@{/assets/js/jquery-2.1.0.min.js}"></script>
+<!-- Bootstrap -->
+<script th:src="@{/assets/js/popper.js}"></script>
+<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+<!-- Plugins -->
+<script th:src="@{/assets/js/owl-carousel.js}"></script>
+<script th:src="@{/assets/js/accordions.js}"></script>
+<script th:src="@{/assets/js/datepicker.js}"></script>
+<script th:src="@{/assets/js/scrollreveal.min.js}"></script>
+<script th:src="@{/assets/js/waypoints.min.js}"></script>
+<script th:src="@{/assets/js/jquery.counterup.min.js}"></script>
+<script th:src="@{/assets/js/imgfix.min.js}"></script>
+<script th:src="@{/assets/js/slick.js}"></script>
+<script th:src="@{/assets/js/lightbox.js}"></script>
+<script th:src="@{/assets/js/isotope.js}"></script>
+<script th:src="@{/assets/js/quantity.js}"></script>
+<!-- Global Init -->
+<script th:src="@{/assets/js/custom.js}"></script>
+
+<script>
+    $(function() {
+        var selectedClass = "";
+        $("p").click(function() {
+            selectedClass = $(this).attr("data-rel");
+            $("#portfolio").fadeTo(50, 0.1);
+            $("#portfolio div").not("." + selectedClass).fadeOut();
+            setTimeout(function() {
+                $("." + selectedClass).fadeIn();
+                $("#portfolio").fadeTo(50, 1);
+            }, 500);
+
+        });
+    });
+
+    (function() {
+        'use strict'
+
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        }, false)
+    }())
+</script>
+</body>
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link
+            href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap"
+            rel="stylesheet">
+    <title>BEAUTIF-SHOP</title>
+
+    <!-- Angular -->
+    <script type="text/javascript" src="/assets/js/angular.min.js"></script>
+    <script type="text/javascript" src="/assets/js/shopping-cart.js"></script>
+    <script type="text/javascript" src="/assets/js/authen.js"></script>
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/font-awesome.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/templatemo-hexashop.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/owl-carousel.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/lightbox.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/cart-view.css}">
+</head>
+
+<body ng-app="app" ng-controller="ctrl">
+<!-- ***** Preloader Start ***** -->
+<div id="preloader">
+    <div class="jumper">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+<!-- ***** Preloader End ***** -->
+
+<!-- ***** header Start ***** -->
+<!--	<header th:replace="/layout/_nav.html"></header>-->
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a th:href="@{/home/index}" class="logo">
+                        <h1
+                                style="font-size: xx-large;
+								font-family: 'Courier New',serif;
+								color: black; margin-top: 30px;"
+                        >BEAUTIF-SHOP</h1>
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li class="scroll-to-section"><a th:href="@{/home/index}"
+                                                         class="active">Home</a></li>
+                        <li class="scroll-to-section"><a th:href="@{/product/men}">Men's</a></li>
+                        <li class="scroll-to-section"><a th:href="@{/product/woman}">Women's</a></li>
+                        <li class="scroll-to-section"><a th:href="@{/product/kids}">Kid's</a></li>
+
+                        <li><a th:href="@{/cart/view}">
+                            <img th:src="@{|/assets/images/bag.png|}" alt="">{{cart.count}}</a></li>
+                        <li class="submenu"><a href="javascript:;"><img
+                                th:src="@{|/assets/images/user-icon.png|}">[[${#request.remoteUser}]]</a>
+                            <ul th:if="${#request.remoteUser}">
+                                <li><a th:href="@{/other/profile}">Profile</a></li>
+                                <li><a th:href="@{/order/list}">You orders</a></li>
+
+                                <!--                                    <li sec:authorize="hasRole('ADMIN')">-->
+                                <!--                                        <a th:href="@{/home/admin}">Administration</a>-->
+                                <!--                                    </li>-->
+                                <li
+                                        th:if="${#request.isUserInRole('ADMIN')}">
+                                    <a th:href="@{/home/admin}">Administration</a>
+                                </li>
+                                <li><a th:href="@{/logout}">Logout</a></li>
+                            </ul>
+                            <ul th:unless="${#request.remoteUser}">
+                                <li><a th:href="@{/security/login}">Login</a></li>
+                            </ul></li>
+
+                    </ul>
+                    <a class='menu-trigger'> <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ***** header End ***** -->
+
+<div class="container bg-white rounded-top mt-5" id="zero-pad">
+    <div class="row d-flex justify-content-center">
+        <div class="col-lg-10 col-12 pt-3">
+            <div class="d-flex ">
+                <div class="pt-1">
+                    <h3 class="text-uppercase font-weight-normal">shopping bag</h3>
+                </div>
+                <div class="ml-auto p-2">
+                    <div class="font-weight-normal">Quantity: {{cart.count}}</div>
+                </div>
+            </div>
+            <hr>
+            <div class="d-flex flex-column pt-4"></div>
+            <div class="d-flex flex-row px-lg-5 mx-lg-5 mobile" id="heading">
+                <div class="px-lg-5 mr-lg-3" id="produc">PRODUCTS</div>
+                <div class="px-lg-5 ml-lg-5" id="prc">PRICE</div>
+                <div class="px-lg-5 ml-lg-1" id="quantity">QUANTITY</div>
+                <div class="px-lg-5 ml-lg-3" id="total">TOTAL</div>
+            </div>
+            <hr>
+            <div class="d-flex flex-row justify-content-between align-items-center pt-lg-4 pt-2 pb-3 border-bottom mobile"
+                 ng-repeat="item in cart.items">
+                <div class="d-flex flex-row align-items-center">
+                    <div>
+                        <img ng-src="/assets/images/{{item.image}}" width="150"
+                             height="150" alt="" id="image" src="">
+                    </div>
+                    <div class="d-flex flex-column pl-md-3 pl-1">
+                        <div>
+                            <h6>Name: {{item.productName}}</h6>
+                        </div>
+                        <div>
+                            Color: <span class="pl-3">{{item.color}}</span>
+                        </div>
+                        <div>
+                            Size: {{item.size}}
+                        </div>
+                    </div>
+                </div>
+                <div class="pl-md-0 pl-1">
+                    <b>$ {{item.price}}</b>
+                </div>
+                <div class="pl-md-0 pl-2">
+                    <label>
+                        <input ng-change="cart.saveToLocalStorage()" ng-model="item.quantity"
+                               type="number" min="1" style="width: 60px;" />
+                    </label>
+                </div>
+                <div class="pl-md-0 pl-1">
+                    <b>$ {{cart.amountItem(item) | number : 2}}</b>
+                </div>
+                <div class="close" ng-click="cart.remove(item.id)" >&times;</div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="container bg-light rounded-bottom py-4">
+    <div class="row d-flex justify-content-center">
+        <div class="col-lg-10 col-12">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <a th:href="@{/home/index}"><button
+                            class="btn btn-sm bg-light border border-dark">GO BACK</button></a>
+                    <button ng-click="cart.clear()"
+                            class="btn btn-sm bg-light border border-dark">CLEAR</button>
+                </div>
+                <div class="px-md-0 px-1" id="footer-font">
+                    <b class="pl-md-4">SUBTOTAL:<span class="pl-md-4">$
+								{{cart.amount | number : 2}}</span></b>
+                </div>
+                <div>
+                    <a th:href="@{/order/checkout}"><button
+                            class="btn btn-sm bg-dark text-white px-lg-5 px-3">CHECK
+                        OUT</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Footer Start ***** -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="first-item">
+                    <div class="logo">
+                        <img th:src="@{/assets/images/white-logo.png}" alt="hexashop ecommerce templatemo">
+                    </div>
+                    <ul>
+                        <li><a href="#">16501 Collins Ave, Sunny Isles Beach, FL 33160, United States</a></li>
+                        <li><a href="#">hexashop@company.com</a></li>
+                        <li><a href="#">010-020-0340</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <h4>Shopping &amp; Categories</h4>
+                <ul>
+                    <li><a href="#">Men’s Shopping</a></li>
+                    <li><a href="#">Women’s Shopping</a></li>
+                    <li><a href="#">Kid's Shopping</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3">
+                <h4>Useful Links</h4>
+                <ul>
+                    <li><a href="#">Homepage</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Help</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3">
+                <h4>Help &amp; Information</h4>
+                <ul>
+                    <li><a href="#">Help</a></li>
+                    <li><a href="#">FAQ's</a></li>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Tracking ID</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-12">
+                <div class="under-footer">
+                    <p>Copyright © 2022 HexaShop Co., Ltd. All Rights Reserved.
+
+                        <br>Design: <a href="https://templatemo.com" target="_parent" title="free css templates">TemplateMo</a></p>
+                    <ul>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- jQuery -->
+<script th:src="@{/assets/js/jquery-2.1.0.min.js}"></script>
+<!-- Bootstrap -->
+<script th:src="@{/assets/js/popper.js}"></script>
+<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+<!-- Plugins -->
+<script th:src="@{/assets/js/owl-carousel.js}"></script>
+<script th:src="@{/assets/js/accordions.js}"></script>
+<script th:src="@{/assets/js/datepicker.js}"></script>
+<script th:src="@{/assets/js/scrollreveal.min.js}"></script>
+<script th:src="@{/assets/js/waypoints.min.js}"></script>
+<script th:src="@{/assets/js/jquery.counterup.min.js}"></script>
+<script th:src="@{/assets/js/imgfix.min.js}"></script>
+<script th:src="@{/assets/js/slick.js}"></script>
+<script th:src="@{/assets/js/lightbox.js}"></script>
+<script th:src="@{/assets/js/isotope.js}"></script>
+<script th:src="@{/assets/js/quantity.js}"></script>
+<!-- Global Init -->
+<script th:src="@{/assets/js/custom.js}"></script>
+
+<script>
+    $(function() {
+        var selectedClass = "";
+        $("p").click(function() {
+            selectedClass = $(this).attr("data-rel");
+            $("#portfolio").fadeTo(50, 0.1);
+            $("#portfolio div").not("." + selectedClass).fadeOut();
+            setTimeout(function() {
+                $("." + selectedClass).fadeIn();
+                $("#portfolio").fadeTo(50, 1);
+            }, 500);
+
+        });
+    });
+</script>
+</body>
+</html>

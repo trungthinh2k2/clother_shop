@@ -1,6 +1,9 @@
 package vn.edu.iuh.fit.shopclother.entity;
 
-import jakarta.persistence.*;
+
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,9 +22,10 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "category_id")
     private int id;
-    @Column(name = "category_name")
+    @Column(name = "category_name", columnDefinition = "nvarchar(500)")
     private String categoryName;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "category")
     private List<Product> productList;
 

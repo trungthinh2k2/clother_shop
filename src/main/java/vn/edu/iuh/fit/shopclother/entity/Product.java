@@ -1,11 +1,13 @@
 package vn.edu.iuh.fit.shopclother.entity;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -14,30 +16,28 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @ToString
-public class Product {
+public class Product implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
     private int id;
-    @Column(name = "product_name")
     private String productName;
-    @Column(name = "price")
     private float price;
-    @Column(name = "created_date")
     private Date createdDate;
-    @Column(name = "image")
     private String image;
-    @Column(name = "available")
     private boolean available;
+    private int quantity;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "product")
     private List<ProductDetail> productDetailList;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "product")
     private List<OrderDetail> orderDetailList;
 

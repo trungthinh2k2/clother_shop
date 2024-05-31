@@ -1,6 +1,6 @@
 package vn.edu.iuh.fit.shopclother.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.*;
 
 @Entity(name = "order_detail")

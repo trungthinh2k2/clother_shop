@@ -1,0 +1,124 @@
+<!doctype html>
+        <html xmlns:th="http://www.thymeleaf.org" lang="en">
+        <head>
+        <title>Sign up</title>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link
+            href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap"
+            rel="stylesheet">
+
+
+            <!-- Additional Angular Files -->
+            <script src="/assets/js/angular.min.js"></script>
+            <script src="/assets/js/shopping-cart.js"></script>
+
+            <!-- Additional CSS Files -->
+            <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+            <link rel="stylesheet" th:href="@{/assets/css/font-awesome.css}">
+            <link rel="stylesheet" th:href="@{/assets/css/templatemo-hexashop.css}">
+            <link rel="stylesheet" th:href="@{/assets/css/owl-carousel.css}">
+            <link rel="stylesheet" th:href="@{/assets/css/lightbox.css}">
+            <link rel="stylesheet" th:href="@{/assets/css/signup.css}">
+
+
+        </head>
+        <body>
+            <div class="container">
+                <div class="d-flex justify-content-center h-100">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Sign Up</h3>
+                        </div>
+                        <div class="card-body">
+                            <form th:action="@{signup/save}" th:object="${account}" method="post">
+                                <div class="form-group input-group">
+                                    <label class="label" for="userName">Username:</label>
+                                    <input type="text" name="userName" id="userName" class="form-control" placeholder="Enter username..." required> <br>
+                                </div>
+                                <div class="form-group input-group">
+                                    <label class="label" for="fullName">Fullname:</label>
+                                    <input type="text" name="fullName" id="fullName" class="form-control" placeholder="Enter fullname..." required> <br>
+                                </div>
+                                <div class="form-group input-group">
+                                    <label class="label" for="email">Email:</label>
+                                    <input type="email" name="email" id="email" class="form-control" placeholder="Enter email..." required> <br>
+                                </div>
+                                <div class="form-group input-group">
+                                    <label class="label" for="password">Password:</label>
+                                    <input type="password" name="password" id="password" class="form-control" placeholder="Enter password..." required> <br>
+                                </div>
+                                <div class="form-group input-group">
+                                    <label class="label" for="confirmPassword">Confirm Password:</label>
+                                    <input type="password" name="confirmPassword" id="confirmPassword" class="form-control" placeholder="Enter confirm password..." required> <br>
+                                </div>
+                                <div class="form-group input-group">
+                                    <label class="label" for="avatar">Image:</label>
+                                    <input type="file" name="avatar" id="avatar" class="form-control" required> <br>
+                                </div>
+                                <div class="form-group input-group">
+                                    <input type="hidden" name="role" id="role" value="USER"> <br>
+                                </div>
+                                <div class="form-group input-group">-->
+                            <button type="submit" class="form-control btn btn-success submit ">Sign Up</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-center links">
+                        Already have an account?<a th:href="@{login}">Sign In</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<!-- jQuery -->
+<script th:src="@{/assets/js/jquery-2.1.0.min.js}"></script>
+<!-- Bootstrap -->
+<script th:src="@{/assets/js/popper.js}"></script>
+<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+<script>
+    (function($) {
+        "use strict";
+    })(jQuery);
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const passwordForm = document.getElementById('passwordForm');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+
+        passwordForm.addEventListener('submit', function(event) {
+            if (passwordInput.value !== confirmPasswordInput.value) {
+                event.preventDefault(); // Ngăn chặn việc submit form
+
+                // Hiển thị thông báo lỗi cho người dùng
+                const errorText = document.createElement('p');
+                errorText.style.color = 'red';
+                errorText.textContent = 'Mật khẩu và xác nhận mật khẩu không khớp.';
+
+                // Kiểm tra xem đã có thông báo lỗi trước đó hay chưa
+                const existingError = confirmPasswordInput.parentNode.querySelector('.error-text');
+                if (existingError) {
+                    confirmPasswordInput.parentNode.removeChild(existingError);
+                }
+
+                // Thêm thông báo lỗi mới vào giao diện
+                confirmPasswordInput.parentNode.appendChild(errorText);
+            }
+        });
+    });
+
+</script>
+
+</body>
+</html>
+
+</title>
+</head>
+<body>
+
+</body>
+</html>

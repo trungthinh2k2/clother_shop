@@ -1,0 +1,28 @@
+<div xmlns="https://www.thymeleaf.org">
+	<div class="panel-heading">PRODUCT LIST</div>
+	<table class="table table-condensed">
+		<thead class="bg-secondary" style="font-variant: small-caps;">
+			<tr>
+				<th>NO . </th>
+				<th>CATEGORY</th>
+				<th>REVENUE</th>
+				<th>TOTAL</th>
+				<th>MIN</th>
+				<th>MAX</th>
+				<th>AVERAGE</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="item in pager.items">
+				<td>{{item.id}}</td>
+				<td>{{item.productName}}</td>
+				<td>{{item.price | number : 2}}</td>
+				<td>{{item.createDate | date : 'dd-MM-yyyy'}}</td>
+				<td>{{item.image}}</td>
+				<td>{{item.categories.name}}</td>
+				<td>{{item.available?'Yes':'No'}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

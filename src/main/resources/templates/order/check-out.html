@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link
+            href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap"
+            rel="stylesheet">
+    <title>BEAUTIF-SHOP</title>
+    <!-- Angular -->
+    <script th:src="@{/assets/js/angular.min.js}"></script>
+    <script th:src="@{/assets/js/shopping-cart.js}"></script>
+    <script th:src="@{/assets/js/authen.js}"></script>
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/font-awesome.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/templatemo-hexashop.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/owl-carousel.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/lightbox.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/check-out.css}">
+</head>
+
+<body ng-app="app" ng-controller="ctrl">
+<!-- ***** Preloader Start ***** -->
+<div id="preloader">
+    <div class="jumper">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+<!-- ***** Preloader End ***** -->
+
+
+<!-- ***** Header Area Start ***** -->
+<header th:replace="/layout/header.html"></header>
+<!-- ***** Header Area End ***** -->
+
+<div class="container check-out">
+    <div class="row">
+        <div class="col-md-4 order-md-2 mb-4">
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <span class="text-muted">Your cart</span> <span
+                    class="badge badge-secondary badge-pill">{{cart.count}}</span>
+            </h4>
+            <ul class="list-group mb-3 ">
+                <li ng-repeat="item in cart.items"
+                    class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">{{item.productName}}</h6>
+                        <small class="text-muted"></small>
+                    </div> <span class="text-muted">$ {{cart.amountItem(item) | number :
+							2}}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between"><span>Total
+							(USD)</span> <strong>$ {{cart.amount | number : 2}}</strong></li>
+            </ul>
+            <form class="card p-2">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Promo code"
+                           disabled="disabled">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-secondary"
+                                disabled="disabled">Redeem</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-8 order-md-1">
+            <h4 class="mb-3">Bill</h4>
+            <form class="needs-validation" novalidate="">
+                <div class="mb-3">
+                    <label for="userName">Username</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">@</span>
+                        </div>
+                        <div class="form-control" id=userName>{{$auth.user.fullName}}</div>
+                        <div class="invalid-feedback" style="width: 100%;">Your
+                            username is required.</div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="email">Email <span class="text-muted">(Optional)</span></label>
+                    <div class="form-control" id="email">{{$auth.user.email}}</div>
+                    <div class="invalid-feedback">Please enter a valid email
+                        address for shipping updates.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="email">Order Date</label>
+                    <div class="form-control">{{order.createdDate | date : 'dd-MM-yyyy'}}</div>
+                </div>
+                <div class="mb-3">
+                    <label for="address">Address</label>
+                    <textarea id="address" ng-model="order.address" class="form-control" placeholder="Hiep Binh Chanh - Thu Duc" required>Hiep Binh Chanh - Thu Duc</textarea>
+                    <div class="invalid-feedback">Please enter your shipping address.</div>
+                </div>
+                <hr class="mb-4">
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" checked="checked" disabled="disabled"
+                           class="custom-control-input" id="same-address"> <label
+                        class="custom-control-label" for="same-address">Shipping
+                    address is the same as my billing address</label>
+                </div>
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="save-info"
+                           disabled="disabled"> <label class="custom-control-label"
+                                                       for="save-info">Save this information for next time</label>
+                </div>
+                <hr class="mb-4">
+                <button ng-click="order.purchase()" class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- ***** Footer Start ***** -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="first-item">
+                    <div class="logo">
+                        <img th:src="@{/assets/images/white-logo.png}" alt="hexashop ecommerce templatemo">
+                    </div>
+                    <ul>
+                        <li><a href="#">16501 Collins Ave, Sunny Isles Beach, FL 33160, United States</a></li>
+                        <li><a href="#">hexashop@company.com</a></li>
+                        <li><a href="#">010-020-0340</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <h4>Shopping &amp; Categories</h4>
+                <ul>
+                    <li><a href="#">Men’s Shopping</a></li>
+                    <li><a href="#">Women’s Shopping</a></li>
+                    <li><a href="#">Kid's Shopping</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3">
+                <h4>Useful Links</h4>
+                <ul>
+                    <li><a href="#">Homepage</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Help</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3">
+                <h4>Help &amp; Information</h4>
+                <ul>
+                    <li><a href="#">Help</a></li>
+                    <li><a href="#">FAQ's</a></li>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Tracking ID</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-12">
+                <div class="under-footer">
+                    <p>Copyright © 2022 HexaShop Co., Ltd. All Rights Reserved.
+
+                        <br>Design: <a href="https://templatemo.com" target="_parent" title="free css templates">TemplateMo</a></p>
+                    <ul>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- jQuery -->
+<script th:src="@{/assets/js/jquery-2.1.0.min.js}"></script>
+<!-- Bootstrap -->
+<script th:src="@{/assets/js/popper.js}"></script>
+<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+<!-- Plugins -->
+<script th:src="@{/assets/js/owl-carousel.js}"></script>
+<script th:src="@{/assets/js/accordions.js}"></script>
+<script th:src="@{/assets/js/datepicker.js}"></script>
+<script th:src="@{/assets/js/scrollreveal.min.js}"></script>
+<script th:src="@{/assets/js/waypoints.min.js}"></script>
+<script th:src="@{/assets/js/jquery.counterup.min.js}"></script>
+<script th:src="@{/assets/js/imgfix.min.js}"></script>
+<script th:src="@{/assets/js/slick.js}"></script>
+<script th:src="@{/assets/js/lightbox.js}"></script>
+<script th:src="@{/assets/js/isotope.js}"></script>
+<script th:src="@{/assets/js/quantity.js}"></script>
+<!-- Global Init -->
+<script th:src="@{/assets/js/custom.js}"></script>
+
+<script>
+    $(function() {
+        var selectedClass = "";
+        $("p").click(function() {
+            selectedClass = $(this).attr("data-rel");
+            $("#portfolio").fadeTo(50, 0.1);
+            $("#portfolio div").not("." + selectedClass).fadeOut();
+            setTimeout(function() {
+                $("." + selectedClass).fadeIn();
+                $("#portfolio").fadeTo(50, 1);
+            }, 500);
+
+        });
+    });
+
+    (function() {
+        'use strict'
+
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        }, false)
+    }())
+</script>
+</body>
+</html>

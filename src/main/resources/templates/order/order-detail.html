@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link
+            href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap"
+            rel="stylesheet">
+    <title>BEAUTIF-SHOP</title>
+    <!-- Angular -->
+    <script th:src="@{/assets/js/angular.min.js}"></script>
+    <script th:src="@{/assets/js/angular2.min.js}"></script>
+    <script src="/assets/js/shopping-cart.js"></script>
+    <script th:src="@{/assets/js/authen.js}"></script>
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/font-awesome.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/templatemo-hexashop.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/owl-carousel.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/lightbox.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/cart-view.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/checkout.css}">
+</head>
+
+<body ng-app="app" ng-controller="ctrl">
+<!-- ***** Preloader Start ***** -->
+<div id="preloader">
+    <div class="jumper">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+<!-- ***** Preloader End ***** -->
+
+<!-- ***** header Start ***** -->
+<header th:replace="/layout/header.html"></header>
+<!-- ***** header End ***** -->
+
+<div class="container checkout" style="margin-top: 108px" th:object="${orders}">
+    <div class="row">
+        <div class="col-md-12 ">
+            <h4 class="mb-3">Bill Infomation</h4>
+            <div class="mb-3">
+                <label for="orderNumber">Order number</label>
+                <div class="input-group">
+                    <div class="form-control" id="orderNumber">[[*{id}]]</div>
+                    <div class="invalid-feedback" style="width: 100%;">Your
+                        username is required.</div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="userName">Username</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">@</span>
+                    </div>
+                    <div class="form-control" id="userName">[[*{account.userName}]]</div>
+                    <div class="invalid-feedback" style="width: 100%;">Your
+                        username is required.</div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="date">Order Date</label>
+                <div class="form-control" id="date">[[*{createdDate}]]</div>
+            </div>
+            <div class="mb-3">
+                <label for="address">Address</label>
+                <div class="form-control" disabled="disabled" id="address">[[*{address}]]</div>
+                <div class="invalid-feedback">Please enter your shipping
+                    address.</div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-12">
+            <h4 class="mb-3">Products Order</h4>
+            <div class="card card-2">
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Image</th>
+                                <th>Product Name</th>
+                                <th>Quantity</th>
+                                <th>Total Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="detail, state: *{orderDetailList}">
+                            <td>
+                                <h3 th:text="${state.index + 1 }"></h3>
+                            </td>
+                            <td>
+                                <img class="img-fluid  my-auto align-self-center mr-2 mr-md-4 pl-0 p-0 m-0"
+                                     th:src="@{|/assets/images/${detail.getProduct().getImage()}|}" width="135" height="135" />
+                            </td>
+                            <td>
+                                <h3 th:text="${detail.getProduct().getProductName()}"></h3>
+                            </td>
+                            <td>
+                                <h3 th:text="${detail.getQuantity()}"></h3>
+                            </td>
+                            <td>
+                                <h3 th:text="${detail.getProduct().getPrice() * detail.getQuantity()}"></h3>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+<!--                    <div class="media">-->
+<!--                        <div class="sq align-self-center ">-->
+<!--                            <img class="img-fluid  my-auto align-self-center mr-2 mr-md-4 pl-0 p-0 m-0"-->
+<!--                                 th:src="@{|/assets/images/${detail.getProduct().getImage()}|}" width="135" height="135" />-->
+<!--                        </div>-->
+<!--                        <div class="media-body my-auto text-right">-->
+<!--                            <div class="row  my-auto flex-column flex-md-row">-->
+<!--                                -->
+<!--                                <div class="col my-auto">-->
+<!--                                    <h3 th:text="${detail.getProduct().getProductName()}"></h3>-->
+<!--                                </div>-->
+
+<!--                                <div class="col my-auto">-->
+<!--                                    <small>Qty : <span th:text="${detail.getQuantity()}"></span>-->
+<!--                                            </small>-->
+<!--                                </div>-->
+<!--                                <div class="col my-auto">-->
+<!--                                    <small>Price : <span th:text="${detail.getProduct().getPrice() * detail.getQuantity()}"></span>-->
+<!--                                    </small>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+
+<!--<footer th:insert="/layout/_footer.html"></footer>-->
+
+
+<!-- jQuery -->
+<script th:src="@{/assets/js/jquery-2.1.0.min.js}"></script>
+<!-- Bootstrap -->
+<script th:src="@{/assets/js/popper.js}"></script>
+<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+<!-- Plugins -->
+<script th:src="@{/assets/js/owl-carousel.js}"></script>
+<script th:src="@{/assets/js/accordions.js}"></script>
+<script th:src="@{/assets/js/datepicker.js}"></script>
+<script th:src="@{/assets/js/scrollreveal.min.js}"></script>
+<script th:src="@{/assets/js/waypoints.min.js}"></script>
+<script th:src="@{/assets/js/jquery.counterup.min.js}"></script>
+<script th:src="@{/assets/js/imgfix.min.js}"></script>
+<script th:src="@{/assets/js/slick.js}"></script>
+<script th:src="@{/assets/js/lightbox.js}"></script>
+<script th:src="@{/assets/js/isotope.js}"></script>
+<script th:src="@{/assets/js/quantity.js}"></script>
+<!-- Global Init -->
+<script th:src="@{/assets/js/custom.js}"></script>
+
+<script>
+    $(function() {
+        var selectedClass = "";
+        $("p").click(function() {
+            selectedClass = $(this).attr("data-rel");
+            $("#portfolio").fadeTo(50, 0.1);
+            $("#portfolio div").not("." + selectedClass).fadeOut();
+            setTimeout(function() {
+                $("." + selectedClass).fadeIn();
+                $("#portfolio").fadeTo(50, 1);
+            }, 500);
+
+        });
+    });
+
+    (function() {
+        'use strict'
+
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        }, false)
+    }())
+</script>
+</body>
+</html>

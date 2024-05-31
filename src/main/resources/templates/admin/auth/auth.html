@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<link
+	href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap"
+	rel="stylesheet">
+	
+<title>All - Products</title>
+<!-- Angular -->
+<script src="/assets/js/angular.min.js"></script>
+<script src="/assets/js/shopping-cart.js"></script>
+<script src="/assets/js/authen.js"></script>
+<script src="/assets/js-admin/product-ctrl.js"></script>
+<script src="/assets/js-admin/authority-ctrl.js"></script>
+<!-- Additional CSS Files -->
+<link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/assets/css/font-awesome.css}">
+<link rel="stylesheet" th:href="@{/assets/css/templatemo-hexashop.css}">
+<link rel="stylesheet" th:href="@{/assets/css/owl-carousel.css}">
+<link rel="stylesheet" th:href="@{/assets/css/lightbox.css}">
+<link rel="stylesheet" th:href="@{/assets/css/style.css}">
+</head>
+
+<body ng-app="app" ng-controller="ctrl">
+
+	<!-- ***** Header Area Start ***** -->
+	<header th:replace="/layout/header.html"></header>
+	<!-- ***** Header Area End ***** -->
+
+	<!-- ***** Products Area Starts ***** -->
+	<div class="container-fluid checkout" style="margin-top: 100px">
+		<div class="bg-white rounded shadow mb-5">
+			<!-- Lined tabs-->
+			<ul role="tablist" class="nav nav-tabs nav-pills with-arrow lined flex-column flex-sm-row text-center">
+				<li class="nav-item flex-sm-fill" th:if="${#request.isUserInRole('ADMIN') }">
+				<a  data-toggle="tab" href="#editproduct" role="tab" aria-controls="home2" aria-selected="true"
+					class="nav-link text-uppercase font-weight-bold mr-sm-3 rounded-0 active">Edit products</a>
+				</li>
+				<li class="nav-item flex-sm-fill" th:if="${#request.isUserInRole('ADMIN') }">
+				<a
+					data-toggle="tab" href="#statistics" role="tab"
+					aria-controls="profile2" aria-selected="false"
+					class="nav-link text-uppercase font-weight-bold mr-sm-3 rounded-0">Product statistics</a>
+				</li>
+				<li class="nav-item flex-sm-fill" th:if="${#request.isUserInRole('ADMIN')}">
+				<a id="contact2-tab"
+					data-toggle="tab" href="#decentralization" role="tab"
+					aria-controls="profile2" aria-selected="false"
+					class="nav-link text-uppercase font-weight-bold mr-sm-3 rounded-0">Decentralization</a>
+				</li>
+			</ul>
+			<div  class="tab-content">
+				<div id="editproduct" role="tabpanel" aria-labelledby="home-tab"
+					class="tab-pane fade py-5 show active">
+					<!-- Lined tabs-->
+					<ul id="myTab2" role="tablist"
+						class="nav nav-tabs nav-tabs2 nav-pills with-arrow lined flex-column flex-sm-row text-center">
+						<li class="nav-item flex-sm-fill">
+						<a id="home2-tab"
+							data-toggle="tab" href="#list" role="tab" aria-controls="home2"
+							aria-selected="true"
+							class="nav-link text-uppercase font-weight-bold mr-sm-3 rounded-0 active">List</a>
+						</li>
+						<li class="nav-item flex-sm-fill">
+						<a id="profile2-tab"
+							data-toggle="tab" href="#edit" role="tab"
+							aria-controls="profile2" aria-selected="false"
+							class="nav-link text-uppercase font-weight-bold mr-sm-3 rounded-0">Edit</a>
+						</li>
+					</ul>
+					<div id="myTab2Content" class="tab-content">
+						<div id="list" role="tabpanel" aria-labelledby="home-tab" class="tab-pane fade show active">
+							<th:block th:replace="/admin/auth/_list.html"></th:block>
+						</div>
+						<div id="edit" role="tabpanel" aria-labelledby="profile-tab" class="tab-pane fade show active">
+							<th:block th:replace="/admin/auth/_edit.html"></th:block>
+						</div>
+					</div>
+				</div>
+				<div id="statistics" role="tabpanel" aria-labelledby="profile-tab"
+					class="tab-pane fade">
+					<p class="leade font-italic">Lorem ipsum dolor sit amet,
+						consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+						labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+						nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						consequat. Duis aute irure dolor in reprehenderit in voluptate
+						velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+						occaecat cupidatat non proident, sunt in culpa qui officia
+						deserunt mollit anim id est laborum.</p>
+					<th:block th:replace="/admin/auth/_statistics.html"></th:block>
+
+				</div>
+				<div id="decentralization" role="tabpanel" aria-labelledby="profile-tab"
+					class="tab-pane fade ">
+							<th:block th:replace="/admin/auth/_decentralization.html"></th:block>
+				</div>
+				<div>
+<!--					<th:block th:replace="/admin/auth/_statistics.html"></th:block>-->
+				</div>
+			</div>
+		</div>
+		<!-- End lined tabs -->
+	</div>
+	<!-- ***** Products Area Ends ***** -->
+
+	<!-- ***** Footer Start ***** -->
+<!--	<footer th:replace="/layout/_footer.html"></footer>-->
+
+
+	<!-- jQuery -->
+	<script th:src="@{/assets/js/jquery-2.1.0.min.js}"></script>
+	<!-- Bootstrap -->
+	<script th:src="@{/assets/js/popper.js}"></script>
+	<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+	<!-- Plugins -->
+	<script th:src="@{/assets/js/owl-carousel.js}"></script>
+	<script th:src="@{/assets/js/accordions.js}"></script>
+	<script th:src="@{/assets/js/datepicker.js}"></script>
+	<script th:src="@{/assets/js/scrollreveal.min.js}"></script>
+	<script th:src="@{/assets/js/waypoints.min.js}"></script>
+	<script th:src="@{/assets/js/jquery.counterup.min.js}"></script>
+	<script th:src="@{/assets/js/imgfix.min.js}"></script>
+	<script th:src="@{/assets/js/slick.js}"></script>
+	<script th:src="@{/assets/js/lightbox.js}"></script>
+	<script th:src="@{/assets/js/isotope.js}"></script>
+	<script th:src="@{/assets/js/quantity.js}"></script>
+	<!-- Global Init -->
+	<script th:src="@{/assets/js/custom.js}"></script>
+
+	<script>
+		$(function() {
+			var selectedClass = "";
+			$("p").click(function() {
+				selectedClass = $(this).attr("data-rel");
+				$("#portfolio").fadeTo(50, 0.1);
+				$("#portfolio div").not("." + selectedClass).fadeOut();
+				setTimeout(function() {
+					$("." + selectedClass).fadeIn();
+					$("#portfolio").fadeTo(50, 1);
+				}, 500);
+
+			});
+		});
+	</script>
+
+</body>
+
+</html>

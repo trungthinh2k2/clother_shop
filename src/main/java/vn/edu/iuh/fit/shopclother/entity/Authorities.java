@@ -1,14 +1,17 @@
 package vn.edu.iuh.fit.shopclother.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.*;
 
-@Entity(name = "authorities")
+@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
+@Table(name = "authorities", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"user_name","role_id"})
+})
 public class Authorities {
 
     @Id
@@ -21,7 +24,7 @@ public class Authorities {
     private Role role;
 
     @ManyToOne
-    @JoinColumn(name = "use_name")
+    @JoinColumn(name = "user_name")
     private Account account;
 
 }

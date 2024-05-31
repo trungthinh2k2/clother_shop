@@ -1,6 +1,8 @@
 package vn.edu.iuh.fit.shopclother.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,9 +20,10 @@ public class Role {
     @Id
     @Column(name = "role_id")
     private String id;
-    @Column(name = "role_name")
+    @Column(name = "role_name", columnDefinition = "nvarchar(500)")
     private String roleName;
 
-    @OneToMany(mappedBy = "role")
+    @JsonIgnore
+    @OneToMany(mappedBy = "role", fetch = FetchType.EAGER)
     private List<Authorities> authoritiesList;
 }
