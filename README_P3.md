@@ -15,7 +15,6 @@
 ## Technologies Used:
 - Backend:
   * Spring boot
-  * Spring Boot
   * Spring Security
   * Spring Data JPA
 - Frontend:
